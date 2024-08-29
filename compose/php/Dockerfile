@@ -12,10 +12,12 @@ RUN mkdir -p /var/www/html
 # Set Profile
 RUN chown laravel:laravel /var/www/html
 
+COPY php.ini /usr/local/etc/php/conf.d/
+
 # Work in the specific space
 WORKDIR /var/www/html
 
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chown -R laravel:laravel /var/www/html/storage /var/www/html/bootstrap/cache
 RUN chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Install dependencies
