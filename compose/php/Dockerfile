@@ -12,7 +12,7 @@ RUN mkdir -p /var/www/html
 # Set Profile
 RUN chown laravel:laravel /var/www/html
 
-COPY php.ini /usr/local/etc/php/conf.d/
+COPY compose/php/php.ini /usr/local/etc/php/conf.d/
 
 # Work in the specific space
 WORKDIR /var/www/html
