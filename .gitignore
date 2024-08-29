@@ -12,6 +12,7 @@ composer.phar
 
 ### dotenv ###
 .env
+/source/
 
 ### Laravel ###
 node_modules/

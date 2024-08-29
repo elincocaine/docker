@@ -1,4 +1,4 @@
-FROM php:7.4-fpm-alpine
+FROM php:8.0-fpm-alpine
 
 # Copy File Config
 ADD ./compose/php/www.conf /usr/local/etc/php-fpm.d/www.conf
@@ -26,16 +26,18 @@ RUN apk add --no-cache \
 
 RUN docker-php-ext-configure gd \
     --with-freetype \
-    --with-jpeg 
+    --with-jpeg \
+    && docker-php-ext-install gd
 
 RUN NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
     docker-php-ext-install -j${NPROC} gd 
 
 RUN apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
 
-RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-install pdo pdo_mysql    
+RUN docker-php-ext-install exif
 
 # install and enable xdebug
 RUN apk add --no-cache $PHPIZE_DEPS \
-	&& pecl install xdebug-2.9.7 \
+	&& pecl install xdebug-3.1.5 \
 	&& docker-php-ext-enable xdebug

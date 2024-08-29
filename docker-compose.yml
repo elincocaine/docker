@@ -25,27 +25,6 @@ services:
       - ./source:/var/www/html:delegated
     depends_on:
       - php
-      - mysql
-    networks:
-      - laravel
-
-  mysql:
-    image: mysql:5.7.29
-    container_name: mysql
-    restart: unless-stopped
-    tty: true
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_USER: ${DB_USERNAME} 
-      MYSQL_PASSWORD: ${DB_PASSWORD} 
-      MYSQL_ROOT_PASSWORD: secret
-      SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
-    volumes:
-      - ./compose/mysql/my.cnf:/etc/mysql/my.cnf
-      - dbdata:/var/lib/mysql/
     networks:
       - laravel
 
@@ -57,26 +36,6 @@ services:
       - "6379:6379"
     networks:
       - laravel
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
-    environment:
-      MYSQL_ROOT_PASSWORD: secret
-      PMA_HOST: mysql
-      PMA_PORT: 3306
-      PMA_ARBITRARY: 1
-    restart: always
-    depends_on:
-      - mysql
-    ports:
-    - "8081:80"
-    volumes:
-      - /sessions
-    networks:
-      - laravel
-    links:
-      - mysql
 
   php:
     build:
@@ -105,7 +64,7 @@ services:
     user: laravel
     networks:
       - laravel
-    entrypoint: ['composer', '--ignore-platform-reqs']
+    entrypoint: ['composer']
 
   npm:
     image: node:15.0.1
@@ -122,8 +81,6 @@ services:
     container_name: artisan
     volumes:
       - ./source:/var/www/html:delegated
-    depends_on:
-      - mysql
     working_dir: /var/www/html
     user: laravel
     entrypoint: ['php', '/var/www/html/artisan']
