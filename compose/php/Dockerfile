@@ -15,6 +15,9 @@ RUN chown laravel:laravel /var/www/html
 # Work in the specific space
 WORKDIR /var/www/html
 
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
 # Install dependencies
 RUN apk add --no-cache \
     freetype \
