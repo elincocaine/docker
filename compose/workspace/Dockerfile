@@ -4,4 +4,7 @@ COPY ./compose/workspace/run.sh /tmp
 
 WORKDIR /var/www/html
 
+RUN chown -R www-data:www-data /var/www/html
+RUN chmod -R 777 /var/www/html
+
 ENTRYPOINT ["/tmp/run.sh"]
