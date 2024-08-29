@@ -17,8 +17,8 @@ COPY compose/php/php.ini /usr/local/etc/php/conf.d/
 # Work in the specific space
 WORKDIR /var/www/html
 
-#RUN chown -R laravel:laravel /var/www/html/storage /var/www/html/bootstrap/cache
-#RUN chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chown -R laravel:laravel /var/www/html
+RUN chmod -R 775 /var/www/html
 
 # Install dependencies
 RUN apk add --no-cache \
