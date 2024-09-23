@@ -51,18 +51,7 @@ services:
       - "9000:9000"
     networks:
       - laravel
-
-  composer:
-    container_name: composer
-    volumes:
-      - ./source:/var/www/html
-    working_dir: /var/www/html
-    depends_on:
-      - php
-    user: laravel
-    networks:
-      - laravel
-    entrypoint: ['composer']
+    entrypoint: ['php']
 
   npm:
     image: node:15.0.1
@@ -71,13 +60,3 @@ services:
       - ./source:/var/www/html
     working_dir: /var/www/html
     entrypoint: ['npm']
-
-  artisan:
-    container_name: artisan
-    volumes:
-      - ./source:/var/www/html:delegated
-    working_dir: /var/www/html
-    user: laravel
-    entrypoint: ['php', '/var/www/html/artisan']
-    networks:
-      - laravel
