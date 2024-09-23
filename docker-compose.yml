@@ -17,9 +17,9 @@ services:
       context: .
       dockerfile: ./compose/nginx/Dockerfile
     container_name: nginx
+    restart: unless-stopped
     ports:
       - "8080:80"
-      - "443:443"
       # Port for xdebug (ensure this matches the remote_port in the xdebug.ini)
       - "9001:9001"
     volumes:
