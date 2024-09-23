@@ -43,7 +43,6 @@ services:
       context: .
       dockerfile: ./compose/php/Dockerfile
     container_name: php
-    restart: unless-stopped
     volumes:
       - ./source:/var/www/html:delegated
       # Enable xdebug
@@ -52,7 +51,7 @@ services:
       - "9000:9000"
     networks:
       - laravel
-    entrypoint: ['php']
+
 
   npm:
     image: node:15.0.1
