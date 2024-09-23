@@ -43,6 +43,7 @@ services:
       context: .
       dockerfile: ./compose/php/Dockerfile
     container_name: php
+    restart: unless-stopped
     volumes:
       - ./source:/var/www/html:delegated
       # Enable xdebug
