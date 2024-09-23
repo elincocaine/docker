@@ -53,8 +53,6 @@ services:
       - laravel
 
   composer:
-    build:
-      context: .
     container_name: composer
     volumes:
       - ./source:/var/www/html
@@ -75,9 +73,6 @@ services:
     entrypoint: ['npm']
 
   artisan:
-    build:
-      context: .
-      dockerfile: ./compose/php/Dockerfile
     container_name: artisan
     volumes:
       - ./source:/var/www/html:delegated
