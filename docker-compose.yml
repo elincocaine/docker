@@ -55,7 +55,6 @@ services:
   composer:
     build:
       context: .
-      dockerfile: ./compose/php/composer/Dockerfile
     container_name: composer
     volumes:
       - ./source:/var/www/html
