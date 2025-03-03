@@ -28,7 +28,9 @@ RUN apk add --no-cache \
     libjpeg-turbo \
     freetype-dev \
     libpng-dev \
-    libjpeg-turbo-dev
+    libjpeg-turbo-dev \
+    libzip-dev \
+    zip
 
 RUN docker-php-ext-configure gd \
     --with-freetype \
@@ -42,6 +44,8 @@ RUN apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
 
 RUN docker-php-ext-install pdo pdo_mysql    
 RUN docker-php-ext-install exif
+#RUN docker-php-ext-configure zip --with-libzip
+RUN docker-php-ext-install zip
 
 # install and enable xdebug
 RUN apk add --no-cache $PHPIZE_DEPS \
