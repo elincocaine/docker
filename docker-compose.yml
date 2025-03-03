@@ -10,7 +10,7 @@ volumes:
   dbdata:
     driver: local
 
-# Workflow
+# Workflowgit 
 services:
   nginx:
     build:
@@ -19,7 +19,7 @@ services:
     container_name: nginx
     restart: unless-stopped
     ports:
-      - "8080:80"
+      - "8585:80"
       # Port for xdebug (ensure this matches the remote_port in the xdebug.ini)
       - "9001:9001"
     volumes:
